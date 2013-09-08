@@ -1,0 +1,60 @@
+= Why would you use Hibernate Search
+Sanne Grinovero
+:awestruct-layout: project-frame
+:awestruct-project: search
+:toc:
+:toc-placement: preamble
+:toc-title: Questions
+
+Hibernate Search adds full-text capabilities to the Hibernate ORM and JPA APIs, but instead of using the limited full-text capabilities of some relational databases it lets you use the powerful Apache Lucene library, so moving the indexing and searching overhead to a separate service.
+
+== Features cheatsheet
+
+=== I want to find _items_ matching "french baguette", most useful results first
+
+When you have a text input for a searchbox: if you expect a human to enter some free-form text and your system needs to provide a result set which is _similar_ to the entered input, a "closest match", then you need to add full-text search capabilities to your application.
+
+=== I need great full-text search capabilities
+
+The full-text search capabilities provided by Hibernate Search are powered by Apache Lucene, a powerful open source full-text library which has proven itself on many first class websites.
+Apache Lucene is:
+
+* fast and efficient
+* extensible
+* offers specialized handling for most languages
+* scalable
+
+== Performance and scalability
+
+== My database is having load problems
+
+Relational databases are the right tool for resolving relational queries, when it comes to full-text search and similar free-text language oriented tooling they often:
+
+* are much slower
+* lack flexibility
+* have an hard to customize/tune for your specific domain
+
+So when you can remove this load from the database to a better fit tool, the database CPU is also less loaded: this can improve overall performance.
+
+== I need to combine text matching with position / coordinates
+
+Hibernate Search supports Spatial coordinates and allows you to narrow down queries based on distance from a specific point of interest.
+
+For example, you could search for "italian restaurant mario" and add a condition "in 5 miles from me".
+
+== I need to create a Lucene index from the text in my database
+
+There are many other applications using Apache Lucene indexes to provide search or data mining features, if you need to produce such an index from data stored in a relational database you can map the information you need via Hibernate ORM and have it extract the Lucene index. See the MassIndexer in the documentation.
+
+[TIP]
+====
+Your source doesn't have to be a relational database: if you can map it via Hibernate OGM, you can import data from many popular NoSQL engines too.
+====
+
+=== I want to organize results by category / price
+
+ s
+
+=== My domain contains specialized language and acronyms.
+
+
